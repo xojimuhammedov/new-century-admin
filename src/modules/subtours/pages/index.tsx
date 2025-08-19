@@ -17,7 +17,7 @@ const Index = () => {
     limit: 100,
   });
   const query = useSubTours(params);
-  const { data, refetch } = query;
+  const { data } = query;
   const countries = data?.data || []; // API: data → data[]
   const total = data?.total || 0; // API: total
   const { mutate } = useDeleteSubTours();

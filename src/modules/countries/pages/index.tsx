@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Button, Space, Tooltip } from 'antd';
+import { Button, Space } from 'antd';
 import { type ColumnsType } from 'antd/es/table';
-import { EditOutlined } from '@ant-design/icons';
 import { useSearchParams } from 'react-router-dom';
 import { useCountries } from '../hooks/queryies';
 import { useDeleteCountry } from '../hooks/mutations';
@@ -42,11 +41,6 @@ const Index = () => {
       page: String(current),
       limit: String(pageSize),
     });
-  };
-
-  const editData = (data: any) => {
-    setUpdate(data);
-    setModalVisible(true);
   };
 
   const handleCancel = () => {

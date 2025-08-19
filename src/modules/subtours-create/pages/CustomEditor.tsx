@@ -1,4 +1,4 @@
-import { BtnBold, BtnBulletList, BtnClearFormatting, BtnItalic, BtnLink, BtnStyles, BtnUnderline, Editor, HtmlButton, Separator, Toolbar } from 'react-simple-wysiwyg';
+import { BtnBold, BtnBulletList, BtnClearFormatting, BtnItalic, BtnLink, BtnStyles, BtnUnderline, Editor, Separator, Toolbar } from 'react-simple-wysiwyg';
 
 const CustomEditor = ({ value, onChange }:any) => {
     return (

@@ -43,11 +43,6 @@ const Index = () => {
     });
   };
 
-  const editData = (data: any) => {
-    setUpdate(data);
-    setModalVisible(true);
-  };
-
   const handleCancel = () => {
     setModalVisible(false);
     setUpdate(null);

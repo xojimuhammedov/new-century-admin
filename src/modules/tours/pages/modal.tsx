@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { type ModalPropType } from '../../../types';
 import { useCreateMembers, useUpdateMembers } from '../hooks/mutations';
 import { useCountries } from '../../countries/hooks/queryies';
-const { TextArea } = Input;
 
 const ModalComponent = ({ open, handleCancel, update }: ModalPropType) => {
   const [form] = useForm();
