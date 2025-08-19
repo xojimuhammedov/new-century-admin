@@ -3,7 +3,6 @@ import { Button, Space, Tooltip } from 'antd';
 import { type ColumnsType } from 'antd/es/table';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Table, ConfirmDelete, Search } from '../../../components';
-// import Modal from './modal';
 import { type TablePaginationConfig } from 'antd/lib';
 import { useSubTours } from '../hooks/queryies';
 import { useDeleteSubTours } from '../hooks/mutation';
@@ -43,11 +42,6 @@ const Index = () => {
   };
 
   const columns: ColumnsType = [
-    // {
-    //   title: 'ID', // ID ustuni qo'shildi
-    //   dataIndex: 'id', // 'id' ustuni uchun dataIndex
-    //   key: 'id', // 'id' ustuni uchun kalit
-    // },
     {
       title: 'Name (Uz)',
       dataIndex: 'name_uz',
@@ -60,22 +54,11 @@ const Index = () => {
       title: 'Name (Ru)',
       dataIndex: 'name_ru',
     },
-    // {
-    //   title: 'Job name (Uz)',
-    //   dataIndex: 'job_name_uz',
-    // },
     {
       title: 'Action',
       key: 'action',
       render: (_: any, record: any) => (
         <Space size="middle">
-          {/* <Tooltip title="Edit">
-            <Button
-              type="default"
-              onClick={() => editData(record)}
-              icon={<EditOutlined />}
-            />
-          </Tooltip> */}
           <ConfirmDelete
             id={record.id}
             deleteItem={(id: string | number) => {

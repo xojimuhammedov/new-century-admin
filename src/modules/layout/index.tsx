@@ -2,7 +2,6 @@ import { useEffect, useState, Suspense } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UserOutlined,
   ReadOutlined,
   TeamOutlined,
   CalendarOutlined,
@@ -61,11 +60,6 @@ const App: React.FC = () => {
 
   const admin: AdminType[] = [
     {
-      content: 'Users',
-      path: '/admin-layout',
-      icon: UserOutlined,
-    },
-    {
       content: 'Countries',
       path: '/admin-layout/countries',
       icon: GlobalOutlined,
@@ -81,8 +75,8 @@ const App: React.FC = () => {
       icon: CalendarOutlined,
     },
     {
-      content: 'Mediatraining',
-      path: '/admin-layout/mediatraining',
+      content: 'Hotel',
+      path: '/admin-layout/hotel',
       icon: ReadOutlined,
     },
   ];

@@ -9,12 +9,12 @@ import App from '../App';
 
 const SignIn = lazy(() => import('../modules/auth/pages'));
 const AdminLayout = lazy(() => import('../modules/layout'));
-const Users = lazy(() => import('../modules/users/pages'));
 const Countries = lazy(() => import('../modules/countries/pages'));
 const SubToursList = lazy(() => import('../modules/subtours/pages'));
 const SubToursCreate = lazy(() => import('../modules/subtours-create/pages'))
-const Mediatraining = lazy(() => import('../modules/mediatraining/pages'));
+const Mediatraining = lazy(() => import('../modules/hotel/pages'));
 const Members = lazy(() => import('../modules/tours/pages'));
+const HotelCreate = lazy(() => import('../modules/hotel-create/pages'))
 import Loading from '../components/loadable';
 import NotFound from '../components/notfound';
 
@@ -24,12 +24,12 @@ const Index: React.FC = () => {
       <Route path="/" element={<App />}>
         <Route index element={<SignIn />} />
         <Route path="admin-layout" element={<AdminLayout />}>
-          <Route index element={<Users />} />
-          <Route path="countries" element={<Countries />} />
+          <Route index path="countries" element={<Countries />} />
           <Route path="members" element={<Members />} />
           <Route path="events" element={<SubToursList />} />
           <Route path="events-create" element={<SubToursCreate />} />
-          <Route path="mediatraining" element={<Mediatraining />} />
+          <Route path="hotel" element={<Mediatraining />} />
+          <Route path='hotel-create' element={<HotelCreate />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>

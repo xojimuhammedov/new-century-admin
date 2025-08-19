@@ -27,7 +27,7 @@ export function useSignInMutation() {
       if (token) {
         saveAccessToken(token);
         setTimeout(() => {
-          navigate('/admin-layout');
+          navigate('/admin-layout/countries');
           Notification('success', 'Sign In Successful', 'Welcome back!');
         }, 1000);
       } else {

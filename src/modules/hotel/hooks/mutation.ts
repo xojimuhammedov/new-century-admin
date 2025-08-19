@@ -1,13 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createUsers, updateUsers, deleteUsers } from '../service';
-import { type Users } from '../type';
 import { Notification } from '../../../utils/notification';
+import { createHotels, deleteHotels, updateHotels } from '../service';
 
 // CREATE
-export function useCreateUsers() {
+export function useCreateHotel() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: Users) => createUsers(data),
+    mutationFn: (data: any) => createHotels(data),
     onSuccess: response => {
       Notification('success', response?.message);
     },
@@ -15,18 +14,18 @@ export function useCreateUsers() {
       if (error) {
         Notification('error', error?.message);
       } else {
-        // ✅ users query invalidatsiya qilinadi
-        await queryClient.invalidateQueries({ queryKey: ['users'] });
+        await queryClient.invalidateQueries({ queryKey: ['countries'] });
       }
     },
   });
 }
 
 // UPDATE
-export function useUpdateUsers() {
+export function useUpdateHotel() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: { id: string; formData: FormData }) => updateUsers(data),
+    mutationFn: (data: { id: string; formData: FormData }) =>
+      updateHotels(data),
     onSuccess: response => {
       Notification('success', response.message);
     },
@@ -34,18 +33,17 @@ export function useUpdateUsers() {
       if (error) {
         Notification('error', error.message);
       } else {
-        // ✅ users query invalidatsiya qilinadi
-        await queryClient.invalidateQueries({ queryKey: ['users'] });
+        await queryClient.invalidateQueries({ queryKey: ['countries'] });
       }
     },
   });
 }
 
 // DELETE
-export function useDeleteUsers() {
+export function useDeleteHotel() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (id: string | number) => deleteUsers(id),
+    mutationFn: (id: string | number) => deleteHotels(id),
     onSuccess: response => {
       Notification('success', response.message);
     },
@@ -53,8 +51,7 @@ export function useDeleteUsers() {
       if (error) {
         Notification('error', error.message);
       } else {
-        // ✅ users query invalidatsiya qilinadi
-        await queryClient.invalidateQueries({ queryKey: ['users'] });
+        await queryClient.invalidateQueries({ queryKey: ['countries'] });
       }
     },
   });

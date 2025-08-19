@@ -1,33 +1,31 @@
 import { useEffect, useState } from 'react';
 import { Button, Space, Tooltip } from 'antd';
 import { type ColumnsType } from 'antd/es/table';
-import { EditOutlined } from '@ant-design/icons';
-import { useSearchParams } from 'react-router-dom';
-import { useUsers } from '../hooks/queryies';
-import { useDeleteUsers } from '../hooks/mutations';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Table, ConfirmDelete, Search } from '../../../components';
-import Modal from './modal';
 import { type TablePaginationConfig } from 'antd/lib';
+import { useHotels } from '../hooks/queryies';
+import { useDeleteHotel } from '../hooks/mutation';
+
 
 const Index = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [update, setUpdate] = useState(null);
+  const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams();
   const [params, setParams] = useState({
     search: '',
     page: 1,
-    limit: 5,
+    limit: 100,
   });
-  const query = useUsers(params);
+  const query = useHotels(params);
   const { data } = query;
   const countries = data?.data || []; // API: data → data[]
   const total = data?.total || 0; // API: total
-  const { mutate } = useDeleteUsers();
+  const { mutate } = useDeleteHotel();
 
   useEffect(() => {
     const pageFromParams = searchParams.get('page') || '1';
-    const limitFromParams = searchParams.get('limit') || '5';
-    const searchFromParams = searchParams.get('search') || '';
+    const limitFromParams = searchParams.get('limit') || '100';
+    const searchFromParams = searchParams.get('keyword') || '';
     setParams(prev => ({
       ...prev,
       page: Number(pageFromParams),
@@ -44,49 +42,29 @@ const Index = () => {
     });
   };
 
-  const editData = (data: any) => {
-    setUpdate(data);
-    setModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setModalVisible(false);
-    setUpdate(null);
-  };
-
   const columns: ColumnsType = [
     {
-      title: 'ID', // ID ustuni qo'shildi
-      dataIndex: 'id', // 'id' ustuni uchun dataIndex
-      key: 'id', // 'id' ustuni uchun kalit
+      title: 'Name (Uz)',
+      dataIndex: 'name_uz',
     },
     {
-      title: 'Username',
-      dataIndex: 'username',
+      title: 'Name (En)',
+      dataIndex: 'name_en',
     },
     {
-      title: 'Phone',
-      dataIndex: 'phone',
-    },
-    {
-      title: 'Role',
-      dataIndex: 'role',
+      title: 'Name (Ru)',
+      dataIndex: 'name_ru',
     },
     {
       title: 'Action',
       key: 'action',
       render: (_: any, record: any) => (
         <Space size="middle">
-          <Tooltip title="Edit">
-            <Button
-              type="default"
-              onClick={() => editData(record)}
-              icon={<EditOutlined />}
-            />
-          </Tooltip>
           <ConfirmDelete
             id={record.id}
-            deleteItem={(id: string | number) => mutate(id)}
+            deleteItem={(id: string | number) => {
+              mutate(id)
+            }}
           />
           <Tooltip title="Sub-category"></Tooltip>
         </Space>
@@ -97,19 +75,14 @@ const Index = () => {
   return (
     <>
       <div className="flex flex-col gap-4">
-        <Modal
-          open={modalVisible}
-          handleCancel={handleCancel}
-          update={update}
-        />
         <div className="flex justify-between p-">
           <Search params={params} setParams={setParams} />
           <Button
             type="primary"
             className="btn"
-            onClick={() => setModalVisible(true)}
+            onClick={() => navigate('/admin-layout/hotel-create')}
           >
-            Add Category
+            Add Hotel
           </Button>
         </div>
         <Table
