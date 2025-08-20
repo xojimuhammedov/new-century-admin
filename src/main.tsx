@@ -3,7 +3,6 @@ import Root from './router/index';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import './index.css';
-import { EditorProvider } from 'react-simple-wysiwyg';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,9 +15,7 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
-    <EditorProvider>
       <Root />
-    </EditorProvider>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 );

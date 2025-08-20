@@ -12,7 +12,7 @@ const Index = () => {
     const [form] = useForm();
     const navigate = useNavigate()
     const [descriptions, setDescriptions] = useState({
-        text_uz: "my <b>HTML</b>",
+        text_uz: "",
         text_en: "",
         text_ru: "",
         text_tr: "",
@@ -65,7 +65,7 @@ const Index = () => {
     };
     return (
         <>
-        <Typography.Title level={2}>Tour paket yaratish</Typography.Title>
+        <Typography.Title level={2}>Mehmonxona paket yaratish</Typography.Title>
         <Form
             form={form}
             name="memberForm"
