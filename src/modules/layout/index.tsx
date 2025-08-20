@@ -20,7 +20,6 @@ import {
   notification,
 } from 'antd';
 import { Outlet, useLocation, NavLink, useNavigate } from 'react-router-dom';
-import Immulogo from '../../assets/Logo (1).png';
 import { removeAccessToken } from '../../utils/token-service';
 import Loading from '../../components/loadable'; // Ensure correct path for Loading
 import { getAccessToken } from '../../utils/token-service'; // Import the getAccessToken function
@@ -106,29 +105,10 @@ const App: React.FC = () => {
         className="min-h-[100vh]"
       >
         <div />
-        <div
-          style={{
-            height: '58px',
-            margin: '16px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: collapsed ? 'center' : 'flex-start',
-          }}
-        >
-          <img
-            src={Immulogo}
-            style={{
-              width: collapsed ? '50px' : '170px', // 👈 collapsed bo‘lsa kichrayadi
-              height: '60px',
-              objectFit: 'contain',
-              marginRight: collapsed ? 0 : '10px',
-              transition: 'all 0.3s ease', // 👈 animatsiya chiroyli chiqishi uchun
-            }}
-          />
-        </div>
         <Menu
           theme="dark"
           mode="inline"
+          style={{marginTop:"36px"}}
           selectedKeys={selectedKeys}
           items={admin.map((item, index) => ({
             key: index.toString(),
