@@ -153,37 +153,32 @@ const Index = () => {
             {days.map((day, index) => (
                 <div key={index} className="border p-4">
                 <div className="grid grid-cols-2 gap-4">
-                    <input
-                    type="text"
-                    placeholder="English"
-                    value={day.en}
-                    onChange={(e:any) => handleChangeDay(index, "en", e.target.value)}
-                    className="border p-2 rounded"
+                    <textarea
+                      placeholder="English"
+                      value={day.en}
+                      onChange={(e:any) => handleChangeDay(index, "en", e.target.value)}
+                      className="border p-2 rounded"
                     />
-                    <input
-                    type="text"
-                    placeholder="Uzbek"
-                    value={day.uz}
-                    onChange={(e:any) => handleChangeDay(index, "uz", e.target.value)}
-                    className="border p-2 rounded"
+                    <textarea
+                      placeholder="Uzbek"
+                      value={day.uz}
+                      onChange={(e:any) => handleChangeDay(index, "uz", e.target.value)}
+                      className="border p-2 rounded"
                     />
-                    <input
-                    type="text"
-                    placeholder="Russian"
-                    value={day.ru}
-                    onChange={(e:any) => handleChangeDay(index, "ru", e.target.value)}
-                    className="border p-2 rounded"
+                    <textarea
+                      placeholder="Russian"
+                      value={day.ru}
+                      onChange={(e:any) => handleChangeDay(index, "ru", e.target.value)}
+                      className="border p-2 rounded"
                     />
-                    <input
-                    type="text"
-                    placeholder="Turkish"
-                    value={day.tr}
-                    onChange={(e:any) => handleChangeDay(index, "tr", e.target.value)}
-                    className="border p-2 rounded"
+                    <textarea
+                      placeholder="Turkish"
+                      value={day.tr}
+                      onChange={(e:any) => handleChangeDay(index, "tr", e.target.value)}
+                      className="border p-2 rounded"
                     />
                 </div>
                 <Button
-                    // type="variant"
                     color="danger" variant="solid"
                     onClick={() => removeDay(index)}
                     className="text-red-500 cursor-pointer mt-2"
@@ -208,7 +203,7 @@ const Index = () => {
 
         {/* Country */}
         <Form.Item
-          label="Country"
+          label="Cities"
           name="city_id"
           rules={[{ required: true, message: 'Select cities' }]}
         >
