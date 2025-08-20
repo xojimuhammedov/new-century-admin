@@ -118,7 +118,7 @@ const Index = () => {
             pageSize: params.limit,
             total: total,
             showSizeChanger: true,
-            pageSizeOptions: ['2', '5', '7', '10'],
+            pageSizeOptions: ['2', '5', '7', '10', '25', '50'],
           }}
           handleChange={handleTableChange}
         />
