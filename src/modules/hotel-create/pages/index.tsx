@@ -3,7 +3,7 @@ import { useForm } from 'antd/lib/form/Form';
 import { UploadOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import CustomEditor from './CustomEditor';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCountries } from '../../countries/hooks/queryies';
 import { useCreateHotel } from '../../hotel/hooks/mutation';
 
@@ -65,7 +65,10 @@ const Index = () => {
     };
     return (
         <>
-        <Typography.Title level={2}>Mehmonxona paket yaratish</Typography.Title>
+        <Link to={'/admin-layout/hotel'}>
+            <Button>Back</Button>
+        </Link>
+        <Typography.Title className='mt-2' level={2}>Mehmonxona paket yaratish</Typography.Title>
         <Form
             form={form}
             name="memberForm"

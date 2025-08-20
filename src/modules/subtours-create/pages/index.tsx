@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useCitiesList } from '../../tours/hooks/queryies';
 import { useCreateSubtours } from '../../subtours/hooks/mutation';
 import CustomEditor from './CustomEditor';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Index = () => {
@@ -87,7 +87,10 @@ const Index = () => {
     };
     return (
         <>
-        <Typography.Title level={2}>Tour paket yaratish</Typography.Title>
+         <Link to={'/admin-layout/events'}>
+            <Button>Back</Button>
+        </Link>
+        <Typography.Title className='mt-2' level={2}>Tour paket yaratish</Typography.Title>
         <Form
             form={form}
             name="memberForm"
