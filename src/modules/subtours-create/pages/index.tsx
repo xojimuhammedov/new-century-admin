@@ -6,6 +6,7 @@ import { useCitiesList } from '../../tours/hooks/queryies';
 import { useCreateSubtours } from '../../subtours/hooks/mutation';
 import CustomEditor from './CustomEditor';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCountries } from '../../countries/hooks/queryies';
 
 
 const Index = () => {
@@ -18,8 +19,8 @@ const Index = () => {
         text_tr: "",
       });
     const { mutate: createMutate, isPending: isCreating } = useCreateSubtours();
-    // const { mutate: updateMutate, isPending: isUpdating } = useUpdateMembers();
     const { data: cities } = useCitiesList({ page: 1, limit: 10 });
+    const { data: countries } = useCountries({ page: 1, limit: 10 });
 
     const handleChange = (lang:any, value:any) => {
         setDescriptions((prev) => ({
@@ -62,6 +63,10 @@ const Index = () => {
         formData.append('city_id', String(values.city_id));
       }
 
+      if (values.country_id !== undefined && values.country_id !== null) {
+        formData.append('country_id', String(values.country_id));
+      }
+
       // Rich text descriptions
       formData.append('text_uz', descriptions.text_uz ?? '');
       formData.append('text_en', descriptions.text_en ?? '');
@@ -75,7 +80,6 @@ const Index = () => {
       fileList.forEach((file: any) => {
         if (file?.originFileObj) {
           formData.append('images', file.originFileObj as File);
-          // If backend expects an array key, use: formData.append('images[]', file.originFileObj as File);
         }
       });
 
@@ -153,7 +157,7 @@ const Index = () => {
         </div>
 
         <div className="space-y-6 mt-8">
-            {days.map((day, index) => (
+            {days?.map((day, index) => (
                 <div key={index} className="border p-4">
                 <div className="grid grid-cols-2 gap-4">
                     <textarea
@@ -203,6 +207,20 @@ const Index = () => {
                 {JSON.stringify(days, null, 2)}
             </pre> */}
         </div>
+
+        <Form.Item
+          label="Country"
+          name="country_id"
+          rules={[{ required: true, message: 'Select countries' }]}
+        >
+          <Select size="large" placeholder="Select countries">
+            {countries?.data?.map((c: any) => (
+              <Select.Option key={c.id} value={c.id}>
+                {c?.title_en}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
 
         {/* Country */}
         <Form.Item
