@@ -78,6 +78,11 @@ const App: React.FC = () => {
       path: '/admin-layout/hotel',
       icon: ReadOutlined,
     },
+    {
+      content: 'Destination',
+      path: '/admin-layout/destination',
+      icon: ReadOutlined,
+    },
   ];
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);

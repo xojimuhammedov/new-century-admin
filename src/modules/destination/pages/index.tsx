@@ -1,32 +1,30 @@
 import { useEffect, useState } from 'react';
-import { Button, Space } from 'antd';
+import { Button, Space, Tooltip } from 'antd';
 import { type ColumnsType } from 'antd/es/table';
-import { useSearchParams } from 'react-router-dom';
-import { useCountries } from '../hooks/queryies';
-import { useDeleteCountry } from '../hooks/mutations';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Table, ConfirmDelete, Search } from '../../../components';
-import Modal from './modal';
 import { type TablePaginationConfig } from 'antd/lib';
+import { useDeleteDestination } from '../hooks/mutation';
+import { useDestination } from '../hooks/queryies';
 
 const Index = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [update, setUpdate] = useState(null);
+  const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams();
   const [params, setParams] = useState({
     search: '',
     page: 1,
-    limit: 5,
+    limit: 100,
   });
-  const query = useCountries(params);
+  const query = useDestination(params);
   const { data } = query;
   const countries = data?.data || []; // API: data → data[]
   const total = data?.total || 0; // API: total
-  const { mutate } = useDeleteCountry();
+  const { mutate } = useDeleteDestination();
 
   useEffect(() => {
     const pageFromParams = searchParams.get('page') || '1';
-    const limitFromParams = searchParams.get('limit') || '5';
-    const searchFromParams = searchParams.get('search') || '';
+    const limitFromParams = searchParams.get('limit') || '100';
+    const searchFromParams = searchParams.get('keyword') || '';
     setParams(prev => ({
       ...prev,
       page: Number(pageFromParams),
@@ -43,22 +41,17 @@ const Index = () => {
     });
   };
 
-  const handleCancel = () => {
-    setModalVisible(false);
-    setUpdate(null);
-  };
-
   const columns: ColumnsType = [
     {
-      title: 'Name (EN)',
-      dataIndex: 'title_en',
-    },
-    {
-      title: 'Name (UZ)',
+      title: 'Name (Uz)',
       dataIndex: 'title_uz',
     },
     {
-      title: 'Name (RU)',
+      title: 'Name (En)',
+      dataIndex: 'title_en',
+    },
+    {
+      title: 'Name (Ru)',
       dataIndex: 'title_ru',
     },
     {
@@ -66,17 +59,13 @@ const Index = () => {
       key: 'action',
       render: (_: any, record: any) => (
         <Space size="middle">
-          {/* <Tooltip title="Edit">
-            <Button
-              type="default"
-              onClick={() => editData(record)}
-              icon={<EditOutlined />}
-            />
-          </Tooltip> */}
           <ConfirmDelete
             id={record.id}
-            deleteItem={(id: string | number) => mutate(id)}
+            deleteItem={(id: string | number) => {
+              mutate(id)
+            }}
           />
+          <Tooltip title="Sub-category"></Tooltip>
         </Space>
       ),
     },
@@ -85,17 +74,12 @@ const Index = () => {
   return (
     <>
       <div className="flex flex-col gap-4">
-        <Modal
-          open={modalVisible}
-          handleCancel={handleCancel}
-          update={update}
-        />
         <div className="flex justify-between p-">
           <Search params={params} setParams={setParams} />
           <Button
             type="primary"
             className="btn"
-            onClick={() => setModalVisible(true)}
+            onClick={() => navigate('/admin-layout/destination-create')}
           >
             Add Category
           </Button>
@@ -108,7 +92,7 @@ const Index = () => {
             pageSize: params.limit,
             total: total,
             showSizeChanger: true,
-            pageSizeOptions: ['2', '5', '7', '10', '25'],
+            pageSizeOptions: ['2', '5', '10', '25', '50', '100'],
           }}
           handleChange={handleTableChange}
         />

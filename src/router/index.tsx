@@ -15,6 +15,8 @@ const SubToursCreate = lazy(() => import('../modules/subtours-create/pages'))
 const Mediatraining = lazy(() => import('../modules/hotel/pages'));
 const Members = lazy(() => import('../modules/tours/pages'));
 const HotelCreate = lazy(() => import('../modules/hotel-create/pages'))
+const Destination = lazy(() => import('../modules/destination/pages'))
+const DestinationCreate = lazy(() => import('../modules/destination-create/pages'))
 import Loading from '../components/loadable';
 import NotFound from '../components/notfound';
 
@@ -30,6 +32,8 @@ const Index: React.FC = () => {
           <Route path="events-create" element={<SubToursCreate />} />
           <Route path="hotel" element={<Mediatraining />} />
           <Route path='hotel-create' element={<HotelCreate />} />
+          <Route path='destination' element={<Destination />} />
+          <Route path='destination-create' element={<DestinationCreate />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
