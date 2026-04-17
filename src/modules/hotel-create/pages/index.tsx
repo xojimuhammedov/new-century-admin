@@ -18,7 +18,7 @@ const Index = () => {
         text_tr: "",
       });
     const { mutate: createMutate, isPending: isCreating } = useCreateHotel();
-    const { data: countries } = useCountries({ page: 1, limit: 10 });
+    const { data: countries } = useCountries({ page: 1, limit: 100 });
 
     const handleChange = (lang:any, value:any) => {
         setDescriptions((prev) => ({
